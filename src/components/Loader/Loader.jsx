@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faJedi } from "@fortawesome/free-solid-svg-icons";
@@ -44,11 +44,17 @@ const DotTransition = {
 const Loader = () => {
   return (
     <Box
-      width="100%"
+      position="absolute"
+      left={0}
+      top={0}
+      height="100vh"
+      width="100vw"
       display="flex"
+      flexDirection="column"
       alignItems="center"
       justifyContent="center"
     >
+      <Typography>Gathering Star Wars characters.</Typography>
       <motion.div
         style={LoadingContainer}
         variants={ContainerVariants}
