@@ -6,6 +6,8 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "build"),
+    publicPath: "/",
+    filename: "bundle.js",
   },
   plugins: [
     new HtmlWebpackPlugin({
