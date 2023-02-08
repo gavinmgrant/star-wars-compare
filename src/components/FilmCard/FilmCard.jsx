@@ -40,7 +40,7 @@ const FilmCard = ({ filmName }) => {
   }, []);
 
   return (
-    <Card sx={{ minWidth: 275, border: "1px solid #f5f5f5" }}>
+    <Card sx={{ minWidth: 250, border: "1px solid #f5f5f5" }}>
       <CardContent className="center" sx={{ padding: "0.5rem 0.5rem 0 0.5rem" }}>
         <Typography variant="h6">{filmName}</Typography>
       </CardContent>

@@ -24,8 +24,8 @@ const Selections = ({
   return (
     <Box sx={{ width: "100%" }}>
       <Typography marginBottom="1.5rem">
-        Select two Star Wars characters below to see which movies they shared a
-        planet, starship or vehicle.
+        Select two Star Wars characters below to see if they ever lived or were
+        seen together in a movie.
       </Typography>
       <Grid container spacing={1} columns={{ xs: 6, sm: 12 }}>
         <Grid item xs={6}>

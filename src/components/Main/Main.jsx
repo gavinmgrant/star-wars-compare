@@ -13,10 +13,9 @@ const Main = () => {
   const [showResults, setShowResults] = useState(false);
 
   const handleCharacterSelect = (event, number) => {
-    if (commonFilms.length > 0) {
-      setShowResults(false);
-      setCommonFilms([]);
-    }
+    setShowResults(false);
+
+    if (commonFilms.length > 0) setCommonFilms([]);
 
     if (number === 1) {
       setFirstCharacter(event.target.value);
