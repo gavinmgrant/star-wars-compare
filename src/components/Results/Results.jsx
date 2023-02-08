@@ -16,7 +16,7 @@ const Results = ({ commonFilms, firstCharacter, secondCharacter }) => {
       <Typography marginBottom="1rem">
         {firstCharacter} and {secondCharacter} were seen together in{" "}
         {commonFilms.length === 1 ? "this" : `these ${commonFilms.length}`} Star
-        Wars movies:
+        Wars {commonFilms.length === 1 ? "movie" : "movies"}:
       </Typography>
       <Grid container spacing={1} columns={12}>
         {commonFilms.map((film, index) => {
