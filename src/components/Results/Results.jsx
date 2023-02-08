@@ -7,7 +7,8 @@ const Results = ({ commonFilms, firstCharacter, secondCharacter }) => {
   if (commonFilms.length === 0)
     return (
       <Typography className="center" margin="2rem">
-        {firstCharacter} and {secondCharacter} don't appear together in any Star Wars movie.
+        {firstCharacter} and {secondCharacter} didn't share a planet, starship
+        or vehicle.
       </Typography>
     );
 

@@ -11,6 +11,7 @@ const Main = () => {
   const [secondCharacter, setSecondCharacter] = useState(null);
   const [commonFilms, setCommonFilms] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const [compareButtonDisabled, setCompareButtonDisabled] = useState(true);
 
   const handleCharacterSelect = (event, number) => {
     setShowResults(false);
@@ -24,44 +25,48 @@ const Main = () => {
     }
   };
 
+  // utility function that takes two arrays as arguments and returns true if they share values
   const compareArrays = (a, b) => {
     for (let i = 0; i < a.length; i++) {
-      if (a[i] === b[i]) {
-        return true;
-      }
+      if (a[i] === b[i]) return true;
     }
     return false;
   };
 
-  const addFilmTitle = () => {
-    // iterate over films to determine the shared film titles
-    films.map((film) => {
-      if (
-        film.characters.includes(firstCharacter.url) &&
-        film.characters.includes(secondCharacter.url) &&
-        // prevent adding a duplicate title to the array of common films
-        !commonFilms.includes(film.title)
-      )
-        setCommonFilms((commonFilms) => [...commonFilms, film.title]);
-    });
-  };
-
   const handleCompare = () => {
-    // check if the characters shared a home planet
-    if (compareArrays(firstCharacter.homeworld, secondCharacter.homeworld)) {
-      addFilmTitle();
+    setCompareButtonDisabled(true);
+    const filmUrls = [];
+    const filmTitles = [];
+
+    for (let i = 0; i < firstCharacter.films.length; i++) {
+      const film = firstCharacter.films[i];
+      const shareFilm = secondCharacter.films.includes(film);
+      // add the film to the common list of films but prevent duplicates
+      const addFilm = () => !filmUrls.includes(film) && filmUrls.push(film);
+
+      if (shareFilm) {
+        if (secondCharacter.homeworld === firstCharacter.homeworld) {
+          addFilm();
+        }
+        if (
+          compareArrays(firstCharacter.starships, secondCharacter.starships)
+        ) {
+          addFilm();
+        }
+        if (compareArrays(firstCharacter.vehicles, secondCharacter.vehicles)) {
+          addFilm();
+        }
+      }
     }
 
-    // check if the characters shared a starship
-    if (compareArrays(firstCharacter.starships, secondCharacter.starships)) {
-      addFilmTitle();
-    }
+    // convert film urls to film titles
+    films.forEach((film) => {
+      if (filmUrls.includes(film.url)) {
+        filmTitles.push(film.title);
+      }
+    });
 
-    // check if the characters shared a vehicle
-    if (compareArrays(firstCharacter.vehicles, secondCharacter.vehicles)) {
-      addFilmTitle();
-    }
-
+    setCommonFilms(filmTitles);
     setShowResults(true);
   };
 
@@ -119,6 +124,12 @@ const Main = () => {
       .catch((error) => console.error(error));
   }, []);
 
+  useEffect(() => {
+    if (firstCharacter && secondCharacter) {
+      setCompareButtonDisabled(false);
+    }
+  }, [firstCharacter, secondCharacter]);
+
   return (
     <Container maxWidth="md">
       <Header />
@@ -128,6 +139,7 @@ const Main = () => {
         secondCharacter={secondCharacter}
         handleCharacterSelect={handleCharacterSelect}
         handleCompare={handleCompare}
+        compareButtonDisabled={compareButtonDisabled}
       />
       {showResults && (
         <Results

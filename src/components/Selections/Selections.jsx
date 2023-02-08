@@ -18,14 +18,16 @@ const Selections = ({
   secondCharacter,
   handleCharacterSelect,
   handleCompare,
+  compareButtonDisabled,
 }) => {
   if (people.length === 0) return <Loader />;
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Typography marginBottom="1.5rem">
-        Select two Star Wars characters below to see if they ever lived or were
-        seen together in a movie.
+      <Typography marginBottom="1.5rem" textAlign="center">
+        Select two Star Wars characters below to see if they shared a planet,
+        starship or vehicle before. If so, we will list the movies where that
+        occurred.
       </Typography>
       <Grid container spacing={1} columns={{ xs: 6, sm: 12 }}>
         <Grid item xs={6}>
@@ -85,7 +87,7 @@ const Selections = ({
           component={motion.button}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          disabled={!firstCharacter || !secondCharacter}
+          disabled={compareButtonDisabled}
         >
           Compare
         </Button>
