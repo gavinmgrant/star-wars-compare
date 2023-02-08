@@ -1,7 +1,7 @@
 {
   "name": "star-wars-compare",
   "version": "1.0.0",
-  "description": "",
+  "description": "A web app that compares two Star Wars characters and determines if they have ever lived or were seen together.",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production",
